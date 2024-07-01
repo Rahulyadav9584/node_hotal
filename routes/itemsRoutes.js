@@ -49,5 +49,45 @@ const MenuItem=require('../model/menu');
         res.status(500).json({err: 'Internal Server Error'});
     }
  })
+  router.put('/:id',async(req,res)=>{
+    try {
+        const itemId=req.params.id; //extract the id from the url parameter
+        const updatedItemData=req.body; //updated data for the person
+
+        const response=await MenuItem.findByIdAndUpdate(itemId,updatedItemData,{
+            new:true, //return the updated document
+            runValidators:true //run moongoose validator
+        })
+        if(!response){
+            return res.status(404).json({error:'item not found'});
+        }
+
+        console.log('data updated');
+        res.status(200).json(response);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({err: 'Internal Server Error'});
+    }
+ })
+
+ router.delete('/:id',async(req,res)=>{
+  try {
+    const itemId=req.params.id;
+
+    //assuming you have a person modal
+
+    const response=await MenuItem.findByIdAndDelete(itemId);
+    if(!response){
+        return res.status(404).json({error:'person not found'});
+    }
+
+    console.log('data deleted');
+        res.status(200).json();
+ }
+   catch (err) {
+    console.log(err);
+        res.status(500).json({err: 'Internal Server Error'});
+  }
+})
 
  module.exports=router;
