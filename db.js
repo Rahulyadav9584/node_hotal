@@ -2,8 +2,8 @@ const mongoose=require('mongoose');
 require('dotenv').config();
 // Define the MongoDB connection URL
 const DB_URL1=process.env.DB_URL1;
- const mongoUrl=DB_URL1; //hotals is database name
-//const mongoUrl=;// online clustor
+const mongoUrl=DB_URL1; //hotals is database name
+//const mongoUrl=;// online server
 
 
 //Set Up mongoDB connection
